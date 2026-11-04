@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="nl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vacatures · LLR OLZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="bar"><a class="brand" href="index.html"><span>LLR</span> OLZ</a>
+            <nav><a href="index.html">Home</a><a href="agenda.html">Agenda</a><a href="reglement.html">Reglement</a><a
+                    class="active" href="vacatures.html">Vacatures</a><a href="test.html">Test</a><a
+                    href="https://olz.schoolwiki.nl/openbaar-lycuem-zeist/onze-school#leerlingenraad"
+                    target="_blank" rel="noopener">Schoolwiki ↗</a></nav>
+        </div>
+    </header>
+    <main class="page">
+        <p class="eyebrow">VACATURES</p>
+        <h1>Doe mee met de leerlingenraad.</h1>
+        <p class="lead">Je kunt je aanmelden als lid van de leerlingenraad, of je richten op één van de werkgroepen.
+            Kies wat bij jou past en vertel ons waarom.</p>
+
+        <h2>Mogelijkheden</h2>
+        <section class="vacancy-grid" aria-label="Mogelijkheden om mee te doen">
+            <article class="vacancy-card">
+                <span class="num">01</span>
+                <h3>Lid van de leerlingenraad</h3>
+                <p>Denk en praat mee over onderwerpen die leerlingen aangaan. Je vertegenwoordigt leerlingen en helpt
+                    ideeën verder te brengen.</p>
+            </article>
+            <article class="vacancy-card">
+                <span class="num">02</span>
+                <h3>Alleen werkgroep acties</h3>
+                <p>Help mee met het bedenken en organiseren van acties en activiteiten voor leerlingen.</p>
+            </article>
+            <article class="vacancy-card">
+                <span class="num">03</span>
+                <h3>Alleen werkgroep beleid</h3>
+                <p>Denk mee over schoolbeleid en werk voorstellen uit die de belangen van leerlingen vertegenwoordigen.</p>
+            </article>
+        </section>
+
+        <section class="application" aria-labelledby="application-heading">
+            <h2 id="application-heading">Aanmelden</h2>
+            <p>Vul het formulier in. Je e-mailprogramma wordt geopend met je aanmelding klaar om te versturen.</p>
+            <form id="application-form">
+                <div class="form-field">
+                    <label for="applicant-name">Naam</label>
+                    <input id="applicant-name" name="name" type="text" autocomplete="name" required>
+                </div>
+                <div class="form-field">
+                    <label for="applicant-class">Klas</label>
+                    <input id="applicant-class" name="class" type="text" autocomplete="off" required>
+                </div>
+                <div class="form-field">
+                    <label for="applicant-email">E-mailadres</label>
+                    <input id="applicant-email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="form-field">
+                    <label for="application-role">Waar wil je je voor aanmelden?</label>
+                    <select id="application-role" name="role" required>
+                        <option value="">Kies een mogelijkheid</option>
+                        <option value="Lid van de leerlingenraad">Lid van de leerlingenraad</option>
+                        <option value="Alleen werkgroep acties">Alleen werkgroep acties</option>
+                        <option value="Alleen werkgroep beleid">Alleen werkgroep beleid</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="applicant-motivation">Waarom wil je meedoen?</label>
+                    <textarea id="applicant-motivation" name="motivation" rows="6" required></textarea>
+                </div>
+                <button class="button" type="submit">Verder met aanmelden</button>
+                <p class="form-note muted">Je aanmelding wordt niet automatisch verstuurd. Controleer en verstuur de
+                    e-mail die wordt geopend.</p>
+                <p id="application-status" class="result" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <div><strong>Leerlingenraad OLZ</strong><br><a
+                href="mailto:leerlingenraad@olz.nl">leerlingenraad@olz.nl</a></div>
+    </footer>
+    <script>
+        document.getElementById('application-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const form = event.currentTarget;
+            if (!form.reportValidity()) return;
+
+            const data = new FormData(form);
+            const subject = 'Aanmelding leerlingenraad';
+            const body = [
+                `Naam: ${data.get('name')}`,
+                `Klas: ${data.get('class')}`,
+                `E-mailadres: ${data.get('email')}`,
+                `Aanmelding voor: ${data.get('role')}`,
+                '',
+                'Motivatie:',
+                data.get('motivation')
+            ].join('\n');
+
+            document.getElementById('application-status').textContent =
+                'Je e-mailprogramma wordt geopend. Verstuur de e-mail daar om je aanmelding af te ronden.';
+            window.location.href = `mailto:leerlingenraad@olz.nl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+    </script>
+</body>
+
+</html>
